@@ -34,4 +34,15 @@ Rejuick::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+
+  # Use Pry instead of IRB
+  silence_warnings do
+    begin
+      require 'pry'
+      IRB = Pry
+    rescue LoadError
+    end
+  end
+
 end
