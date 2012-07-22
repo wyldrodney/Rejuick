@@ -5,8 +5,16 @@ include XmppDaemon
 
 describe "XmppDaemon" do
 
-  it "should tell hello" do
-    start.should eq("KOKOKO SIR!")
+  let(:jid) { 'rejuick-bot@jabber.ru' }
+  let(:pass) { 'vfplfbot' }
+
+
+  it "should connect to server" do
+    connect(jid, pass).should be
+  end
+
+  it "should not connect to server" do
+    connect(jid, 'wrong').should_not be
   end
 
 end
