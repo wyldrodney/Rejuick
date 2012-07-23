@@ -105,18 +105,22 @@ module XmppDaemon
 
     return nil if jid.empty? or body.empty?
 
-    if %w( HELP HELPFULL NICK LOGIN PING ).include? body.upcase
-      case body.upcase
-      when 'HELP'
-        [jid, 'HELP? Didn\'t hear. Gonna play ping-pong?']
-      when 'PING'
-        [jid, 'PONG']
+    msg = if %w( help nick wtf ping ).include? body.downcase
+      case body.downcase
+      when 'help'
+        'Help? Didn\'t hear. Gonna play ping-pong?'
+      when 'nick'
+        'User.nick()...'
+      when 'ping'
+        'Pong'
       else
-        [jid, 'I know that word. And what?']
+        'I know that word. And what?'
       end
     else
-      [jid, "#{jid}: #{body}"]
+      "#{jid}: #{body}"
     end
+
+    [jid, msg]
   end
 
 end
