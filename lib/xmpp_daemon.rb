@@ -36,9 +36,18 @@ module XmppDaemon
   end
 
   def listen(bot)
-    list = []
+    bot.add_message_callback { |msg| p parse(msg) }
+  end
 
-    bot.add_message_callback { }
+  def parse(msg)
+    sender = msg.from.split('/')
+
+    jid = sender[0].blank? ? '' : sender[0]
+    resource = sender[1].blank? ? '' : sender[1]
+
+    body = msg.body.blank? ? '' : msg.body
+
+    [jid, resource, body]
   end
 
 end
