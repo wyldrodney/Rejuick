@@ -9,7 +9,7 @@ module XmppDaemon
     @@master = nil
 
     def self.start
-      if @@master.is_disconnected?
+      unless self.status
         puts 'Starting.'
         new(JID, PASS)
       else
@@ -18,7 +18,7 @@ module XmppDaemon
     end
 
     def self.stop
-      if @@master.is_connected?
+      if self.status
         @@master.close
         puts "Closed."
       else
@@ -27,7 +27,7 @@ module XmppDaemon
     end
 
     def self.status
-      @@master.is_connected?
+      @@master and @@master.is_connected?
     end
 
 
