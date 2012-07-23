@@ -1,10 +1,14 @@
 module XmppDaemon
 
+  require 'xmpp4r/roster'
+
   JID = 'rejuick-bot@jabber.ru'
   PASS = 'vfplfbot'
 
 
   class Client
+
+    include XmppDaemon
 
     @@master = nil
 
@@ -20,9 +24,9 @@ module XmppDaemon
     def self.stop
       if self.status
         @@master.close
-        puts "Closed."
+        puts 'Closed.'
       else
-        puts "Not running."
+        puts 'Not running.'
       end
     end
 
@@ -37,10 +41,10 @@ module XmppDaemon
       if @bot
         @@master = @bot
 
-        @bot.send(Jabber::Presence.new.set_show(nil))
+        @bot.send(Jabber::Presence.new.set_type(:available))
         listen(@bot)
       else
-        raise "Can't connect."
+        raise 'Can\'t connect.'
       end
     end
 
@@ -60,10 +64,20 @@ module XmppDaemon
     end
 
     def listen(bot)
-      bot.add_message_callback { |msg| workout parse(msg) }
+      roster = Jabber::Roster::Helper.new(bot)
+
+      roster.add_subscription_request_callback do |item, ask|
+        roster.accept_subscription(ask.from)
+        @bot.send(Jabber::Presence.new.set_type(:subscribe).set_to(ask.from))
+      end
+
+      bot.add_message_callback do |msg|
+        answer = workout parse(msg)
+        send_message answer[0], answer[1]
+      end
     end
 
-    def send(jid, body)
+    def send_message(jid, body)
       message = Jabber::Message::new(jid, body)
       message.set_type(:chat)
 
@@ -75,7 +89,7 @@ module XmppDaemon
 
 
   def parse(msg)
-    sender = msg.from.blank? ? [] : msg.from.split('/')
+    sender = msg.from.blank? ? [] : msg.from.to_s.split('/')
 
     jid = sender[0] || ''
     resource = sender[1] || ''
@@ -94,14 +108,14 @@ module XmppDaemon
     if %w( HELP HELPFULL NICK LOGIN PING ).include? body.upcase
       case body.upcase
       when 'HELP'
-        send(jid, 'HELP? Didn\'t hear. Gonna play ping-pong?')
+        [jid, 'HELP? Didn\'t hear. Gonna play ping-pong?']
       when 'PING'
-        send(jid, 'PONG')
+        [jid, 'PONG']
       else
-        send(jid, 'I know that word. And what?')
+        [jid, 'I know that word. And what?']
       end
     else
-      send(jid, "#{jid}: #{body}")
+      [jid, "#{jid}: #{body}"]
     end
   end
 
