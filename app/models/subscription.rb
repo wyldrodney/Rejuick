@@ -28,7 +28,7 @@ class Subscription < ActiveRecord::Base
 
   def self.whitelist(writer_id, reader_id, confirmation)
     if confirmation
-      'Whitelist is disabled. Everyone can subscribe to you free.'
+      'Whitelist is disabled. Everyone can subscribe to you.'
     else
       pair = find_pair(reader_id, writer_id)
 
