@@ -1,5 +1,52 @@
 require 'spec_helper'
 
 describe Subscription do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  after(:each) { Subscription.delete_all }
+
+  context "Find pair" do
+    it "should not find pair" do
+      Subscription.find_pair(2, 1).should_not be
+    end
+
+    it "should find pair" do
+      Subscription.create(writer: 1, reader: 2, confirm: true)
+      Subscription.find_pair(2, 1).should be_a_kind_of(Subscription)
+    end
+  end
+
+  context "Whitelist" do
+    it "should ignore confirmation" do
+      Subscription.create(writer: 1, reader: 2, confirm: true)
+      Subscription.whitelist(1, 2, true)
+      Subscription.first.confirm.should eq(true)
+    end
+
+    it "should set confirmation to true" do
+      Subscription.create(writer: 1, reader: 2, confirm: false)
+      Subscription.whitelist(1, 2, false)
+      Subscription.first.confirm.should eq(true)
+    end
+
+    it "should set confirmation to false" do
+      Subscription.create(writer: 1, reader: 2, confirm: true)
+      Subscription.whitelist(1, 2, false)
+      Subscription.first.confirm.should eq(false)
+    end
+  end
+
+  context "Subscribe" do
+    it "should do nothing if subscription exists" do
+      Subscription.create(writer: 1, reader: 2, confirm: true)
+      Subscription.subscribe(2, 1, false) ## or true as last argument
+      Subscription.all.count.should eq(1)
+    end
+
+    it "should create record if subscription doesn't exists" do
+      Subscription.create(writer: 1, reader: 2, confirm: true)
+      Subscription.subscribe(2, 3, true) ## or false as last argument
+      Subscription.all.count.should eq(2)
+    end
+  end
+
 end

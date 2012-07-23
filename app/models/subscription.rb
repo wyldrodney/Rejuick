@@ -16,8 +16,15 @@ class Subscription < ActiveRecord::Base
     pair = find_pair(reader_id, writer_id)
 
     if pair
+      ## If subscription presens
+
       msg = 'Already subscribed!' if pair.confirm
     else
+      ## If subscription call first time
+      ## then create one
+      ## Using writer's `confirm` attr setting
+      ## to set whitelist confirmation option
+
       create(reader: reader_id, writer: writer_id, confirm: confirmation)
 
       msg = 'Subscribed!' if confirmation
@@ -28,8 +35,13 @@ class Subscription < ActiveRecord::Base
 
   def self.whitelist(writer_id, reader_id, confirmation)
     if confirmation
+      ## If writer's attr is {confirm: true}
+      ## then subs are confirmed by default
+
       'Whitelist is disabled. Everyone can subscribe to you.'
     else
+      ## Else find subscription and change it
+
       pair = find_pair(reader_id, writer_id)
 
       if pair.confirm
