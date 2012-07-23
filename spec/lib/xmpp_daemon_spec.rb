@@ -39,13 +39,27 @@ describe "XmppDaemon" do
 
   context 'Connect' do
     it "should connect to server" do
-      pending
-      connect(jid, pass).should be
+      Client.new(jid, pass).should be
     end
 
     it "should not connect to server" do
+      expect { Client.new(jid, 'wrong') }.to raise_error
+    end
+  end
+
+
+  context "Start and stop" do
+    it "should start" do
       pending
-      connect(jid, 'wrong').should_not be
+      Client.start
+      Client.status.should be
+    end
+
+    it "should stop" do
+      pending
+      Client.start
+      Client.stop
+      Client.status.should_not be
     end
   end
 
