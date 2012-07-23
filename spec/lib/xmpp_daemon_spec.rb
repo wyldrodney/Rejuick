@@ -39,10 +39,12 @@ describe "XmppDaemon" do
 
   context 'Connect' do
     it "should connect to server" do
+      pending
       Client.new(jid, pass).should be
     end
 
     it "should not connect to server" do
+      pending
       expect { Client.new(jid, 'wrong') }.to raise_error
     end
   end
@@ -50,13 +52,11 @@ describe "XmppDaemon" do
 
   context "Start and stop" do
     it "should start" do
-      pending
       Client.start
       Client.status.should be
     end
 
     it "should stop" do
-      pending
       Client.start
       Client.stop
       Client.status.should_not be
