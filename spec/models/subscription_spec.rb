@@ -49,4 +49,22 @@ describe Subscription do
     end
   end
 
+  context "Readers, writers and friends" do
+    it "should find reader for writer and return array" do
+      Subscription.create(writer: 1, reader: 2, confirm: true)
+      Subscription.readers(1)[0].reader.should eq(2)
+    end
+
+    it "should find writer for reader and return array" do
+      Subscription.create(writer: 1, reader: 2, confirm: true)
+      Subscription.writers(2)[0].writer.should eq(1)
+    end
+
+    it "should find friends and return array's intersection" do
+      Subscription.create(writer: 1, reader: 2, confirm: true)
+      Subscription.create(writer: 2, reader: 1, confirm: true)
+      Subscription.friends(1)[0].should eq(2)
+    end
+  end
+
 end

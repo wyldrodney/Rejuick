@@ -1,5 +1,6 @@
 module XmppDaemon
 
+  require 'xmpp4r'
   require 'xmpp4r/roster'
 
   JID = 'rejuick-bot@jabber.ru'
@@ -105,19 +106,21 @@ module XmppDaemon
 
     return nil if jid.empty? or body.empty?
 
-    msg = if %w( help nick wtf ping ).include? body.downcase
+    msg = if %w( help nick ping about lang wl ).include? body.downcase
       case body.downcase
       when 'help'
-        'Help? Didn\'t hear. Gonna play ping-pong?'
+        'Help: nick (set registartion), about (set your info), lang (set your lang). Gonna play ping-pong?'
       when 'nick'
         'User.nick()...'
       when 'ping'
         'Pong'
-      else
-        'I know that word. And what?'
+      when 'about'
+        'User.about()...'
+      when 'wl'
+        'User.whitelist()...'
       end
     else
-      "#{jid}: #{body}"
+      body.reverse
     end
 
     [jid, msg]
