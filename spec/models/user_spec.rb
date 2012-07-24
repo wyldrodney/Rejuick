@@ -16,6 +16,16 @@ describe User do
     end
   end
 
+  context "Nick string format" do
+    it "should pass test for @nick" do
+      User.formatted_nick?('@nick').should be
+    end
+
+    it "should not pass test for @nick" do
+      User.formatted_nick?('nick').should_not be
+    end
+  end
+
   context "Subscribe" do
     it "should not find user" do
       user = User.create(jid: 'wyld@rodney.ru', nick: 'wyld')

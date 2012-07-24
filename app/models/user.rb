@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
 
   def self.find_user(arg)
-    user = if arg.kind_of?(String) && arg[0] == '@'
+    user = if formatted_nick?(arg)
       ## If argument is String and looks like @nickname, then...
 
       User.find_by_nick(arg[1..-1])
@@ -15,6 +15,26 @@ class User < ActiveRecord::Base
       ## Here we'll put other type of search (by link?)...
 
       nil
+    end
+  end
+
+  def self.formatted_nick?(arg)
+    arg.kind_of?(String) && arg[0] == '@'
+
+    ## TODO: Format regex
+  end
+
+  def self.nickname(name, jid)
+    return 'Usage: nick @nickname' unless formatted_nick?(name)
+
+    user = User.find_by_jid(jid)
+
+    if user
+      user.update_attributes(nick: name[1..-1])
+      'Nick updated!'
+    else
+      User.create(nick: name[1..-1], jid: jid)
+      'User created!'
     end
   end
 
