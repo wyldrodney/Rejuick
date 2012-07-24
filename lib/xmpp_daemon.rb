@@ -111,7 +111,7 @@ module XmppDaemon
       when 'help'
         'Help: nick (set registartion), about (set your info), lang (set your lang). Gonna play ping-pong?'
       when 'nick'
-        'User.nick()...'
+        'Usage: nick @nickname'
       when 'ping'
         'Pong'
       when 'about'
@@ -120,7 +120,11 @@ module XmppDaemon
         'User.whitelist()...'
       end
     else
-      body.reverse
+      if body =~ /nick @/i
+        User.nickname("@#{body.split('@')[1]}", jid)
+      else
+        body.reverse
+      end
     end
 
     [jid, msg]

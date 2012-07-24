@@ -30,8 +30,7 @@ class User < ActiveRecord::Base
     user = User.find_by_jid(jid)
 
     if user
-      user.update_attributes(nick: name[1..-1])
-      'Nick updated!'
+      user.update_attributes(nick: name[1..-1]) ? 'Nick updated!' : 'Nick already in use!'
     else
       User.create(nick: name[1..-1], jid: jid)
       'User created!'

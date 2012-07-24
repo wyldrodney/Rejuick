@@ -73,4 +73,22 @@ describe User do
     end
   end
 
+  context "Nickname" do
+    it "should fail for wrong nickname" do
+      User.nickname('nick', 'wow@ya.ru').should eq('Usage: nick @nickname')
+    end
+
+    it "should create user" do
+      User.nickname('@wow', 'wow@ya.ru')
+      User.all.count.should eq(1)
+    end
+
+    it "should update user nickname" do
+      User.create(jid: 'wow@ya.ru', nick: 'wyld')
+      User.nickname('@wow', 'wow@ya.ru')
+
+      User.first.nick.should eq('wow')
+    end
+  end
+
 end
