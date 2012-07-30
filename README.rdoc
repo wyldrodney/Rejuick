@@ -1,2 +1,6 @@
 {<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/wyldrodney/Rejuick]
 
+Как на этом вашем грёбаном RDoc писать, а? %)
+
+Пожалуй, этот сайт являет собой скорую смерть сервису микроблоггинга Juick.com. Эт всё.
+
