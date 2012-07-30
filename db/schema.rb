@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723142228) do
+ActiveRecord::Schema.define(:version => 20120730092253) do
+
+  create_table "posts", :force => true do |t|
+    t.integer "user_id"
+    t.text    "body"
+  end
+
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "receivers", :force => true do |t|
+    t.integer "post_id"
+    t.integer "user_id"
+  end
+
+  add_index "receivers", ["post_id"], :name => "index_receivers_on_post_id"
+  add_index "receivers", ["user_id"], :name => "index_receivers_on_user_id"
 
   create_table "subscriptions", :force => true do |t|
     t.integer "writer"
@@ -21,6 +36,20 @@ ActiveRecord::Schema.define(:version => 20120723142228) do
 
   add_index "subscriptions", ["reader", "confirm"], :name => "index_subscriptions_on_reader_and_confirm"
   add_index "subscriptions", ["writer", "confirm"], :name => "index_subscriptions_on_writer_and_confirm"
+
+  create_table "tagmaps", :force => true do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
+  end
+
+  add_index "tagmaps", ["post_id"], :name => "index_tagmaps_on_post_id"
+  add_index "tagmaps", ["tag_id"], :name => "index_tagmaps_on_tag_id"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name"
 
   create_table "users", :force => true do |t|
     t.string  "jid"

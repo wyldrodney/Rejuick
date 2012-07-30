@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+  has_many :posts
+  has_many :receivers
+
   attr_accessible :about, :confirm_subs, :jid, :lang, :nick
 
   validates_presence_of :jid, :nick
@@ -19,7 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def self.formatted_nick?(arg)
-    arg.kind_of?(String) && arg =~ /^@[ a-z \u0430-\u044f \u0451 \. \- \_ ]+$/i
+    arg.kind_of?(String) && arg =~ /^@[a-z\u0430-\u044f\u0451\.\-\_]+$/i
 
     ## English + Russian chars + symbols: minus, dot and underline
   end
