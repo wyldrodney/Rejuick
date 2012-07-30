@@ -19,9 +19,9 @@ class User < ActiveRecord::Base
   end
 
   def self.formatted_nick?(arg)
-    arg.kind_of?(String) && arg[0] == '@'
+    arg.kind_of?(String) && arg =~ /^@[ a-z \u0430-\u044f \u0451 \. \- \_ ]+$/i
 
-    ## TODO: Format regex
+    ## English + Russian chars + symbols: minus, dot and underline
   end
 
   def self.nickname(name, jid)

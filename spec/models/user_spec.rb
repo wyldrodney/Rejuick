@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 require 'spec_helper'
 
 describe User do
@@ -21,8 +23,20 @@ describe User do
       User.formatted_nick?('@nick').should be
     end
 
-    it "should not pass test for @nick" do
+    it "should not pass test for nick" do
       User.formatted_nick?('nick').should_not be
+    end
+
+    it "should pass test for @nick-_." do
+      User.formatted_nick?('@nick-_.').should be
+    end
+
+    it "should pass test for @ник" do
+      User.formatted_nick?('@ник').should be
+    end
+
+    it "should not pass test for @nick!" do
+      User.formatted_nick?('@nick!').should_not be
     end
   end
 
