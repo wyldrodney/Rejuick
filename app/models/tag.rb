@@ -8,7 +8,9 @@ class Tag < ActiveRecord::Base
   validates_presence_of :name
 
 
-  def self.create_tags(tags)
+  def self.perform_tags(tags)
+    ## Add new tags. For both new and old return their ids.
+
     ids = tags.map do |name|
       tag = Tag.find_by_name(name)
 

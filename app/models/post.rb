@@ -13,16 +13,23 @@ class Post < ActiveRecord::Base
 
 
   def self.create_post(body, jid)
+    ## Method ONLY for creating posts.
+
     user = User.find_by_jid(jid)
     return 'You aren\'t registered. Type: nick.' unless user
 
-    result = get_tags_and_body(body)
+    result = Post.get_tags_and_body(body)
     return 'Message body can\'t be empty.' unless result
-
-    tags = result[0]
 
     post = user.posts.create(body: result[1])
 
+    tags = Post.clear_privacy_tags(result[0])
+
+    Tag.perform_tags(tags).each do |tag_id|
+      Tagmap.create(post_id: post.id, tag_id: tag_id)
+
+      ## DO NOT check anything. We need checks on post modification.
+    end
 
 
 #    get_privacy_level(tags)
@@ -45,7 +52,25 @@ class Post < ActiveRecord::Base
   end
 
 
+  def self.clear_privacy_tags(tags)
+    ## Search all privacy tags and leave the last.
+
+    deleted = []
+
+    tags.each do |tag|
+      if %w(private public friends).include?(tag)
+        ind = tags.index(tag)
+        deleted << tags.delete_at(ind)
+      end
+    end
+
+    deleted.empty? ? tags : [deleted.last] + tags
+  end
+
+
   def self.get_privacy_level(tags)
+    ## Search privacy tag. Default is public.
+
     case
     when tags.include?('private')
       'private'

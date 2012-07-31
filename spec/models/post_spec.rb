@@ -50,4 +50,24 @@ describe Post do
       Post.get_privacy_level(['kokoko', 'private']).should eq('private')
     end
   end
+
+
+  context "Clear privacy level" do
+    it "should return public if only public" do
+      Post.clear_privacy_tags(['public']).first.should eq('public')
+    end
+
+    it "should return public if public is last" do
+      Post.clear_privacy_tags(['private', 'friends', 'public']).first.should eq('public')
+    end
+
+    it "should return public at first position" do
+      Post.clear_privacy_tags(['sir', 'public']).first.should eq('public')
+    end
+
+    it "should return nothing" do
+      Post.clear_privacy_tags([]).should be_empty
+    end
+  end
+
 end
