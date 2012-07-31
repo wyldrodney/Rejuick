@@ -4,6 +4,12 @@ require 'spec_helper'
 
 describe Post do
 
+  after(:each) do
+    Post.delete_all
+    User.delete_all
+  end
+
+
   context "Get tags and body" do
     it "should return two tags" do
       Post.get_tags_and_body('*hello *kitty Kiss me')[0].count.should eq(2)
@@ -37,36 +43,19 @@ describe Post do
   end
 
 
-  context "Get privacy level" do
-    it "should tell public if no tags" do
-      Post.get_privacy_level([]).should eq('public')
+  context "Create post" do
+    it "should tell that user not found" do
+      Post.create_post('text', "#{rand(9999..99999)}@ya.ru").should eq('You aren\'t registered. Type: nick.')
     end
 
-    it "should tell public if no privacy tags" do
-      Post.get_privacy_level(['kokoko', 'ugnich']).should eq('public')
+    it "should tell that body is empty" do
+      User.create(jid: 'test@ya.ru', nick: 'test')
+      Post.create_post('', 'test@ya.ru').should eq('Message body can\'t be empty.')
     end
 
-    it "should tell private if private tag included" do
-      Post.get_privacy_level(['private', 'kokoko']).should eq('private')
-    end
-  end
-
-
-  context "Clear privacy level" do
-    it "should return public if only public" do
-      Post.clear_privacy_tags(['public']).first.should eq('public')
-    end
-
-    it "should return public if public is last" do
-      Post.clear_privacy_tags(['private', 'friends', 'public']).first.should eq('public')
-    end
-
-    it "should return public at first position" do
-      Post.clear_privacy_tags(['sir', 'public']).first.should eq('public')
-    end
-
-    it "should return nothing" do
-      Post.clear_privacy_tags([]).should be_empty
+    it "should tell that post saved" do
+      User.create(jid: 'test@ya.ru', nick: 'test')
+      Post.create_post('text', 'test@ya.ru').should =~ /Post #\d+ saved/
     end
   end
 

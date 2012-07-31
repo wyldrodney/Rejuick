@@ -18,4 +18,39 @@ describe Tag do
     end
   end
 
+
+  context "Get privacy level" do
+    it "should tell public if no tags" do
+      Tag.get_privacy_level([]).should eq('public')
+    end
+
+    it "should tell public if no privacy tags" do
+      Tag.get_privacy_level(['kokoko', 'ugnich']).should eq('public')
+    end
+
+    it "should tell private if private tag included" do
+      Tag.get_privacy_level(['private', 'kokoko']).should eq('private')
+    end
+  end
+
+
+  context "Clear privacy level" do
+    it "should return public if only public" do
+      Tag.clear_privacy_tags(['public']).first.should eq('public')
+    end
+
+    it "should return public if public is last" do
+      Tag.clear_privacy_tags(['private', 'friends', 'public']).first.should eq('public')
+    end
+
+    it "should return public at first position" do
+      Tag.clear_privacy_tags(['sir', 'public']).first.should eq('public')
+    end
+
+    it "should return nothing" do
+      Tag.clear_privacy_tags([]).should be_empty
+    end
+  end
+
+
 end

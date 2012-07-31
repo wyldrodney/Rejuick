@@ -23,16 +23,13 @@ class Post < ActiveRecord::Base
 
     post = user.posts.create(body: result[1])
 
-    tags = Post.clear_privacy_tags(result[0])
+    tags = Tag.clear_privacy_tags(result[0])
 
-    Tag.perform_tags(tags).each do |tag_id|
-      Tagmap.create(post_id: post.id, tag_id: tag_id)
+    Tagmap.perform_tagmaps(Tag.perform_tags(tags), post)
 
-      ## DO NOT check anything. We need checks on post modification.
-    end
+    Receiver.perform_receivers(post, user, Tag.get_privacy_level(tags))
 
-
-#    get_privacy_level(tags)
+    "Post ##{post.id} saved!"
   end
 
 
@@ -49,33 +46,6 @@ class Post < ActiveRecord::Base
     body = body[splitter..-1].strip
 
     [tags, body]
-  end
-
-
-  def self.clear_privacy_tags(tags)
-    ## Search all privacy tags and leave the last.
-
-    deleted = []
-
-    tags.each do |tag|
-      if %w(all public readers friends private).include?(tag)
-        ind = tags.index(tag)
-        deleted << tags.delete_at(ind)
-      end
-    end
-
-    deleted.empty? ? tags : [deleted.last] + tags
-  end
-
-
-  def self.get_privacy_level(tags)
-    ## Search privacy tag. Default is public.
-
-    if %w(all public readers friends private).include?(tags[0])
-      tags[0]
-    else
-      'public'
-    end
   end
 
 end
