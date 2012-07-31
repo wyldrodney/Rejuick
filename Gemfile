@@ -6,6 +6,7 @@ gem 'rails', '3.2.6'
 gem 'mysql2'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'xmpp4r'
+gem 'delayed_job_active_record'
 
 gem 'pry'
 

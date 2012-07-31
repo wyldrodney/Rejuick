@@ -59,4 +59,16 @@ describe Post do
     end
   end
 
+
+  context "Display message" do
+    it "should be equal to original (without privacy tags and with newline sign)" do
+      msg = "*pussy\nGo-go-go!"
+
+      User.create(jid: 'test@ya.ru', nick: 'test')
+      Post.create_post(msg, 'test@ya.ru')
+
+      Post.last.to_message.should eq(msg)
+    end
+  end
+
 end

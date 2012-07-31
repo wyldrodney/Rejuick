@@ -12,10 +12,21 @@ class Receiver < ActiveRecord::Base
     post.receivers.delete_all
 
     unless privacy == 'private'
-      user.readers.each do |reader|
+      ## Get receivers' jids.
+
+      jids = user.readers.each do |reader|
         Receiver.create(user_id: reader.id, post_id: post.id)
+        reader.jid
       end
+
+      ## Tell DelayedJob to send all messages later.
+
+      Receiver.delay.xmpp_send(jids, post.to_message) unless jids.empty?
     end
+  end
+
+  def self.xmpp_send(jids, body)
+    jids.each { |jid| XmppDaemon::Client.message(jid, body) }
   end
 
 end

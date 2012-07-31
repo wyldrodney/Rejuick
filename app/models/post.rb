@@ -48,4 +48,10 @@ class Post < ActiveRecord::Base
     [tags, body]
   end
 
+
+  def to_message
+    body = self.tags.map { |tag| "*#{tag.name}" }.join(' ')
+    body + "\n" + self.body
+  end
+
 end
