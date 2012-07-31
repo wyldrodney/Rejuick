@@ -50,8 +50,13 @@ class Post < ActiveRecord::Base
 
 
   def to_message
-    body = self.tags.map { |tag| "*#{tag.name}" }.join(' ')
-    body + "\n" + self.body
+    body = "##{self.id}\n"
+    body += "@#{self.user.nick}: "
+
+    body += self.tags.map { |tag| "*#{tag.name}" }.join(' ')
+    body += "\n" unless tags.empty?
+
+    body + self.body
   end
 
 end

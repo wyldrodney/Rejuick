@@ -14,14 +14,14 @@ class Receiver < ActiveRecord::Base
     unless privacy == 'private'
       ## Get receivers' jids.
 
-      jids = user.readers.each do |reader|
+      jids = user.readers.map do |reader|
         Receiver.create(user_id: reader.id, post_id: post.id)
         reader.jid
       end
 
-      ## Tell DelayedJob to send all messages later.
+      ## Disable DelayedJob's delay...
 
-      Receiver.delay.xmpp_send(jids, post.to_message) unless jids.empty?
+      Receiver.xmpp_send(jids, post.to_message) unless jids.empty?
     end
   end
 

@@ -3,6 +3,8 @@ module XmppDaemon
   require 'xmpp4r'
   require 'xmpp4r/roster'
 
+  require 'pry'
+
   JID = 'rejuick-bot@jabber.ru'
   PASS = 'vfplfbot'
 
@@ -33,6 +35,19 @@ module XmppDaemon
 
     def self.status
       @@master and @@master.is_connected?
+    end
+
+    def self.message(jid, body)
+      if self.status
+        binding.pry
+
+        message = Jabber::Message::new(jid, body)
+        message.set_type(:chat)
+
+        @@master.send message
+      else
+        puts 'Not running.'
+      end
     end
 
 

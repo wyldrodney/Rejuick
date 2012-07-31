@@ -5,9 +5,11 @@ describe Receiver do
   before(:each) do
     @bob = stub(User)
     @bob.stub(:id).and_return(1)
+    @bob.stub(:jid).and_return(nil)
 
     @john = stub(User)
     @john.stub(:id).and_return(2)
+    @john.stub(:jid).and_return(nil)
 
     @rod = stub(User)
     @rod.stub(:readers).and_return([@bob, @john])
@@ -18,6 +20,7 @@ describe Receiver do
     @post = stub(Post)
     @post.stub(:id).and_return(1)
     @post.stub(:receivers).and_return(@rec)
+    @post.stub(:to_message).and_return(nil)
   end
 
   after(:each) { Receiver.delete_all }

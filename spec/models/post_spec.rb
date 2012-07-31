@@ -67,7 +67,7 @@ describe Post do
       User.create(jid: 'test@ya.ru', nick: 'test')
       Post.create_post(msg, 'test@ya.ru')
 
-      Post.last.to_message.should eq(msg)
+      Post.last.to_message.should be_include(msg)
     end
   end
 
