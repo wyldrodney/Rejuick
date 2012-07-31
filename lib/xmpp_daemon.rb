@@ -130,6 +130,8 @@ module XmppDaemon
       when /^s\s+/
         User.subscribe("@#{body.split('@')[1]}")
 
+      else
+        'Unknown command. Try: help.'
       end
     else
       Post.create_post(body, jid)

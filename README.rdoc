@@ -1,6 +1,10 @@
 {<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/wyldrodney/Rejuick]
 
-Как на этом вашем грёбаном RDoc писать, а? %)
+Микроблоггинг-сервис, клон Juick.com.
 
-Пожалуй, этот сайт являет собой скорую смерть сервису микроблоггинга Juick.com. Эт всё.
+Иногда доступен по адресу (jid): rejuick-bot@jabber.ru
+
+Понимает команды: help, nick, wl, s и создавать посты.
+
+Для постов умеет теги и 3 уровня приватности: public, readers и private. Скоро научится рассылать сообщения. Неудобно как тестировать всё это...
 
