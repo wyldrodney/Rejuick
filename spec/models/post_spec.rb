@@ -47,7 +47,7 @@ describe Post do
     end
 
     it "should tell private if private tag included" do
-      Post.get_privacy_level(['kokoko', 'private']).should eq('private')
+      Post.get_privacy_level(['private', 'kokoko']).should eq('private')
     end
   end
 

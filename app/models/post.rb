@@ -58,7 +58,7 @@ class Post < ActiveRecord::Base
     deleted = []
 
     tags.each do |tag|
-      if %w(private public friends).include?(tag)
+      if %w(all public readers friends private).include?(tag)
         ind = tags.index(tag)
         deleted << tags.delete_at(ind)
       end
@@ -71,11 +71,8 @@ class Post < ActiveRecord::Base
   def self.get_privacy_level(tags)
     ## Search privacy tag. Default is public.
 
-    case
-    when tags.include?('private')
-      'private'
-    when tags.include?('friends')
-      'friends'
+    if %w(all public readers friends private).include?(tags[0])
+      tags[0]
     else
       'public'
     end
