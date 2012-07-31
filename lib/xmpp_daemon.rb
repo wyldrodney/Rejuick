@@ -106,25 +106,33 @@ module XmppDaemon
 
     return nil if jid.empty? or body.empty?
 
-    msg = if %w( help nick ping about lang wl ).include? body.downcase
-      case body.downcase
-      when 'help'
-        'Help: nick (set registartion), about (set your info), lang (set your lang). Gonna play ping-pong?'
-      when 'nick'
-        'Usage: nick @nickname'
-      when 'ping'
+    msg = if body =~ /^(help|nick|ping|wl|s)/i
+      case body
+
+      when /^help\s*$/
+        'Help: nick (register), s (subscribe), wl (allow subscription), enter text for new post. Gonna play ping-pong?'
+
+      when /^ping\s*$/
         'Pong'
-      when 'about'
-        'User.about()...'
-      when 'wl'
-        'User.whitelist()...'
+
+      when /^nick\s*$/
+        'Usage: nick @nickname'
+      when /^nick\s+/
+        User.nickname("@#{body.split('@')[1]}", jid)
+
+      when /^wl\s*$/
+        'Usage: wl @nickname'
+      when /^wl\s+/
+        User.whitelist("@#{body.split('@')[1]}")
+
+      when /^s\s*$/
+        'Usage: s @nickname'
+      when /^s\s+/
+        User.subscribe("@#{body.split('@')[1]}")
+
       end
     else
-      if body =~ /nick @/i
-        User.nickname("@#{body.split('@')[1]}", jid)
-      else
-        body.reverse
-      end
+      Post.create_post(body, jid)
     end
 
     [jid, msg]
