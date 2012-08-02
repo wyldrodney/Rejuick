@@ -29,4 +29,18 @@ class Receiver < ActiveRecord::Base
     jids.each { |jid| XmppDaemon::Client.message(jid, body) }
   end
 
+
+  def self.can_read?(user, post)
+    ## If reader is post owner or
+    ## is in receivers list, then return true
+
+    if post.user_id == user.id
+      true
+    elsif !(Receiver.where(post_id: post.id, user_id: user.id).empty?)
+      true
+    else
+     false
+    end
+  end
+
 end

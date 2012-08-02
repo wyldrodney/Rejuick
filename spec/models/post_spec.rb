@@ -45,7 +45,7 @@ describe Post do
 
   context "Create post" do
     it "should tell that user not found" do
-      Post.create_post('text', "#{rand(9999..99999)}@ya.ru").should eq('You aren\'t registered. Type: nick.')
+      Post.create_post('text', "#{rand(9999..99999)}@ya.ru").should eq('You aren\'t registered. See: nick.')
     end
 
     it "should tell that body is empty" do
@@ -71,4 +71,37 @@ describe Post do
     end
   end
 
+
+  context "Read post" do
+    it "should tell that user not found" do
+      Post.read_post('#111', "#{rand(9999..99999)}@ya.ru").should eq('You aren\'t registered. See: nick.')
+    end
+
+    it "should tell that post not found" do
+      User.create(jid: 'test@ya.ru', nick: 'test')
+      Post.read_post('#111', 'test@ya.ru').should eq('Post not found.')
+    end
+
+    it "should allow to read my own post" do
+      User.create(jid: 'test@ya.ru', nick: 'test')
+      Post.create_post('text', 'test@ya.ru')
+      post_id = Post.last.id
+
+      Post.read_post("##{post_id}", 'test@ya.ru').should_not eq('You aren\'t allowed to read this post.')
+    end
+
+    it "should not allow to read post" do
+      User.create(jid: 'test@ya.ru', nick: 'test')
+      User.create(jid: 'test2@ya.ru', nick: 'test2')
+      Post.create_post('text', 'test@ya.ru')
+      post_id = Post.last.id
+
+      Post.read_post("##{post_id}", 'test2@ya.ru').should eq('You aren\'t allowed to read this post.')
+    end
+
+    it "should tell that post number is wrong" do
+      User.create(jid: 'test@ya.ru', nick: 'test')
+      Post.read_post('##111', 'test@ya.ru').should eq('Usage: #12345')
+    end
+  end
 end

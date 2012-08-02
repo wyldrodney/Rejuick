@@ -120,7 +120,7 @@ module XmppDaemon
 
     return nil if jid.empty? or body.empty?
 
-    msg = if body =~ /^(help|nick|ping|wl|s)/i
+    msg = if body =~ /^(help|nick|ping|wl|s|#)/i
       case body
 
       when /^help\s*$/i
@@ -143,6 +143,9 @@ module XmppDaemon
         'Usage: s @nickname'
       when /^s\s+/i
         User.cmd_subscribe("@#{body.split('@')[1]}", jid)
+
+      when /^#\d+$/
+        User.read_post(body, jid)
 
       else
         'Unknown command. Try: help.'
