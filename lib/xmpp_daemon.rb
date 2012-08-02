@@ -144,8 +144,8 @@ module XmppDaemon
       when /^s\s+/i
         User.cmd_subscribe("@#{body.split('@')[1]}", jid)
 
-      when /^#\d+$/
-        User.read_post(body, jid)
+      when /^#/
+        Post.read_post(body, jid)
 
       else
         'Unknown command. Try: help.'
