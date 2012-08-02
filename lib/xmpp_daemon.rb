@@ -124,26 +124,26 @@ module XmppDaemon
     msg = if body =~ /^(help|nick|ping|wl|s)/i
       case body
 
-      when /^help\s*$/
+      when /^help\s*$/i
         'Help: nick (register), s (subscribe), wl (allow subscription), enter text for new post. Gonna play ping-pong?'
 
-      when /^ping\s*$/
+      when /^ping\s*$/i
         'Pong'
 
-      when /^nick\s*$/
+      when /^nick\s*$/i
         'Usage: nick @nickname'
-      when /^nick\s+/
-        User.nickname("@#{body.split('@')[1]}", jid)
+      when /^nick\s+/i
+        User.cmd_nickname("@#{body.split('@')[1]}", jid)
 
-      when /^wl\s*$/
+      when /^wl\s*$/i
         'Usage: wl @nickname'
-      when /^wl\s+/
-        User.whitelist("@#{body.split('@')[1]}")
+      when /^wl\s+/i
+        User.cmd_whitelist("@#{body.split('@')[1]}", jid)
 
-      when /^s\s*$/
+      when /^s\s*$/i
         'Usage: s @nickname'
-      when /^s\s+/
-        User.subscribe("@#{body.split('@')[1]}")
+      when /^s\s+/i
+        User.cmd_subscribe("@#{body.split('@')[1]}", jid)
 
       else
         'Unknown command. Try: help.'

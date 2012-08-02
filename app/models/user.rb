@@ -21,23 +21,48 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.not_registered
+    'You aren\'t registered. See: nick.'
+  end
+
+
   def self.formatted_nick?(arg)
     arg.kind_of?(String) && arg =~ /^@[a-z\u0430-\u044f\u0451\.\-\_]+$/i
 
     ## English + Russian chars + symbols: minus, dot and underline
   end
 
-  def self.nickname(name, jid)
+
+  def self.cmd_nickname(name, jid)
+    ## Read command from xmpp, check nick format.
+
     return 'Usage: nick @nickname' unless formatted_nick?(name)
 
     user = User.find_by_jid(jid)
 
+    ## If users exixsts, then rename, else create.
+
     if user
-      user.update_attributes(nick: name[1..-1]) ? 'Nick updated!' : 'Nick already in use!'
+      user.nickname(name[1..-1])
     else
       User.create(nick: name[1..-1], jid: jid)
       'User created!'
     end
+  end
+
+  def nickname(name)
+    ## Rename user if it's unique.
+
+    self.update_attributes(nick: name) ? 'Nick updated!' : 'Nick already in use!'
+  end
+
+
+  def self.cmd_subscribe(arg, jid)
+    ## Check that sender is registered.
+
+    user = User.find_by_jid(jid)
+
+    user ? user.subscribe(arg) : User.not_registered
   end
 
   def subscribe(arg)
@@ -46,11 +71,21 @@ class User < ActiveRecord::Base
     writer ? Subscription.subscribe(self.id, writer.id, writer.confirm_subs) : 'User not found.'
   end
 
+
+  def self.cmd_whitelist(arg, jid)
+    ## Check that sender is registered.
+
+    user = User.find_by_jid(jid)
+
+    user ? user.whitelist(arg) : User.not_registered
+  end
+
   def whitelist(arg)
     reader = User.find_user(arg)
 
     reader ? Subscription.whitelist(self.id, reader.id, self.confirm_subs) : 'User not found.'
   end
+
 
   def readers
     User.where(id: Subscription.readers(self.id))

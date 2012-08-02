@@ -42,14 +42,15 @@ describe User do
 
   context "Subscribe" do
     it "should not find user" do
-      user = User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
-      user.subscribe('@mark').should eq('User not found.')
+      User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
+      User.cmd_subscribe('@mark', 'wyld@rodney.ru').should eq('User not found.')
     end
 
     it "should find user" do
-      user = User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
+      User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
       User.create(jid: 'mark@rodney.ru', nick: 'mark')
-      ret = user.subscribe('@mark')
+      ret = User.cmd_subscribe('@mark', 'wyld@rodney.ru')
+
       ret.should_not eq('User not found.')
       ret.should be_a_kind_of(String)
     end
@@ -57,14 +58,15 @@ describe User do
 
   context "Whitelist" do
     it "should not find user" do
-      user = User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
-      user.whitelist('@mark').should eq('User not found.')
+      User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
+      User.cmd_whitelist('@mark', 'wyld@rodney.ru').should eq('User not found.')
     end
 
     it "should find user" do
-      user = User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
+      User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
       User.create(jid: 'mark@rodney.ru', nick: 'mark')
-      ret = user.whitelist('@mark')
+      ret = User.cmd_whitelist('@mark', 'wyld@rodney.ru')
+
       ret.should_not eq('User not found.')
       ret.should be_a_kind_of(String)
     end
@@ -89,19 +91,25 @@ describe User do
 
   context "Nickname" do
     it "should fail for wrong nickname" do
-      User.nickname('nick', 'wow@ya.ru').should eq('Usage: nick @nickname')
+      User.cmd_nickname('nick', 'wow@ya.ru').should eq('Usage: nick @nickname')
     end
 
     it "should create user" do
-      User.nickname('@wow', 'wow@ya.ru')
+      User.cmd_nickname('@wow', 'wow@ya.ru')
       User.all.count.should eq(1)
     end
 
-    it "should update user nickname" do
+    it "should call update nickname" do
       User.create(jid: 'wow@ya.ru', nick: 'wyld')
-      User.nickname('@wow', 'wow@ya.ru')
+      User.cmd_nickname('@wow', 'wow@ya.ru')
 
       User.first.nick.should eq('wow')
+    end
+  end
+
+  context "Not registered" do
+    it "should tell not registered" do
+      User.not_registered.should eq('You aren\'t registered. See: nick.')
     end
   end
 
