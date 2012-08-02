@@ -39,7 +39,6 @@ module XmppDaemon
 
     def self.message(jid, body)
       if self.status
-        binding.pry
 
         message = Jabber::Message::new(jid, body)
         message.set_type(:chat)
