@@ -9,6 +9,7 @@ gem 'xmpp4r'
 gem 'delayed_job_active_record'
 
 gem 'pry'
+gem 'psych'
 
 
 group :assets do

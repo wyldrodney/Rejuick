@@ -5,7 +5,7 @@ class Receiver < ActiveRecord::Base
   attr_accessible :user_id, :post_id
 
 
-  def self.perform_receivers(post, user, privacy)
+  def self.perform_receivers(post, user, privacy, send=true)
     ## Create new list of post receivers.
     ## *public and *readers => user.readers
 
@@ -20,8 +20,9 @@ class Receiver < ActiveRecord::Base
       end
 
       ## Disable DelayedJob's delay...
+      ## Send if send arg is true (false used for new subscribers).
 
-      Receiver.xmpp_send(jids, post.to_message) unless jids.empty?
+      Receiver.xmpp_send(jids, post.to_message) unless jids.empty? or send.nil?
     end
   end
 

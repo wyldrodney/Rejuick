@@ -4,7 +4,10 @@ require 'spec_helper'
 
 describe User do
 
-  after(:each) { User.delete_all }
+  after(:each) do
+    User.delete_all
+    Receiver.delete_all
+  end
 
   context "Find user" do
     it "should not find user" do
@@ -54,6 +57,27 @@ describe User do
       ret.should_not eq('User not found.')
       ret.should be_a_kind_of(String)
     end
+
+    it "should add receiver on post creation" do
+      wyld = User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
+      mark = User.create(jid: 'mark@rodney.ru', nick: 'mark')
+
+      User.cmd_subscribe('@mark', 'wyld@rodney.ru')
+      Post.create_post('body', 'mark@rodney.ru')
+
+      Receiver.where(post_id: Post.last.id, user_id: wyld.id).should_not be_empty
+    end
+
+    it "should add receiver on subscription" do
+      wyld = User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
+      mark = User.create(jid: 'mark@rodney.ru', nick: 'mark')
+
+      Post.create_post('body', 'mark@rodney.ru')
+      Receiver.where(post_id: Post.last.id, user_id: wyld.id).should be_empty
+
+      User.cmd_subscribe('@mark', 'wyld@rodney.ru')
+      Receiver.where(post_id: Post.last.id, user_id: wyld.id).should_not be_empty
+    end
   end
 
   context "Whitelist" do
@@ -69,6 +93,29 @@ describe User do
 
       ret.should_not eq('User not found.')
       ret.should be_a_kind_of(String)
+    end
+
+    it "should add receiver on wl" do
+      wyld = User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
+      mark = User.create(jid: 'mark@rodney.ru', nick: 'mark', confirm_subs: false)
+
+      Post.create_post('body', 'mark@rodney.ru')
+      User.cmd_subscribe('@mark', 'wyld@rodney.ru')
+      User.cmd_whitelist('@wyld', 'mark@rodney.ru')
+
+      Receiver.where(post_id: Post.last.id, user_id: wyld.id).should_not be_empty
+    end
+
+    it "should remove receiver on second wl" do
+      wyld = User.create(jid: 'wyld@rodney.ru', nick: 'wyld')
+      mark = User.create(jid: 'mark@rodney.ru', nick: 'mark', confirm_subs: false)
+
+      Post.create_post('body', 'mark@rodney.ru')
+      User.cmd_subscribe('@mark', 'wyld@rodney.ru')
+      User.cmd_whitelist('@wyld', 'mark@rodney.ru')
+      User.cmd_whitelist('@wyld', 'mark@rodney.ru')
+
+      Receiver.where(post_id: Post.last.id, user_id: wyld.id).should be_empty
     end
   end
 

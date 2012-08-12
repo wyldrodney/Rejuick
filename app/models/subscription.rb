@@ -2,6 +2,23 @@ class Subscription < ActiveRecord::Base
   attr_accessible :confirm, :reader, :writer
 
   validates_presence_of :reader, :writer
+
+
+  after_save do |sub|
+    if sub.confirm
+      ## Reader now can read writre's posts
+
+      user = User.find(sub.writer)
+
+      user.posts.each do |post|
+        Receiver.perform_receivers(post, user, 'public', nil)
+      end
+    else
+      ## Reader can't read writer's posts
+
+      Receiver.where(post_id: Post.where(user_id: sub.writer), user_id: sub.reader).delete_all
+    end
+  end
  
 
   def self.find_pair(reader_id, writer_id)
