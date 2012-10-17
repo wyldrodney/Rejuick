@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tag Return ids" tests="3" time="0.212075395" failures="0" errors="0" skipped="0">
+  <testcase name="Tag Return ids should return one id" time="0.1615412">
+  </testcase>
+  <testcase name="Tag Return ids should return empty array" time="0.001446186">
+  </testcase>
+  <testcase name="Tag Return ids should return new ids" time="0.048438968">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

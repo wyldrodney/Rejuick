@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Receiver Perform receivers" tests="3" time="0.065520202" failures="0" errors="0" skipped="0">
+  <testcase name="Receiver Perform receivers should create two records on public" time="0.031529876">
+  </testcase>
+  <testcase name="Receiver Perform receivers should not create any records" time="0.004116446">
+  </testcase>
+  <testcase name="Receiver Perform receivers should create two records on readers" time="0.029258782">
+  </testcase>
+  <system-out>
+Not running.
+Not running.
+Not running.
+Not running.
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

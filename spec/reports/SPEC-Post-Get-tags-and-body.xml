@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Post Get tags and body" tests="7" time="0.014243459" failures="0" errors="0" skipped="0">
+  <testcase name="Post Get tags and body should return body" time="0.00343674">
+  </testcase>
+  <testcase name="Post Get tags and body should return nil if body is blank" time="0.001646177">
+  </testcase>
+  <testcase name="Post Get tags and body should return two tags with newline" time="0.001889779">
+  </testcase>
+  <testcase name="Post Get tags and body should return body" time="0.001977656">
+  </testcase>
+  <testcase name="Post Get tags and body should return no tags" time="0.001546501">
+  </testcase>
+  <testcase name="Post Get tags and body should return two tags" time="0.001457418">
+  </testcase>
+  <testcase name="Post Get tags and body should return two tags" time="0.00147869">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

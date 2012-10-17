@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Receiver User can read post?" tests="3" time="0.086232518" failures="0" errors="0" skipped="0">
+  <testcase name="Receiver User can read post? should return true if receiver" time="0.027093628">
+  </testcase>
+  <testcase name="Receiver User can read post? should not return true" time="0.033458649">
+  </testcase>
+  <testcase name="Receiver User can read post? should return true if owner" time="0.0250861">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

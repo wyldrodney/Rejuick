@@ -1,1 +1,3 @@
 --color --format documentation
+--require ci/reporter/rake/rspec_loader
+--format CI::Reporter::RSpec

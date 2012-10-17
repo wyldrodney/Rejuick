@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tag Clear privacy level" tests="4" time="0.058842917" failures="0" errors="0" skipped="0">
+  <testcase name="Tag Clear privacy level should return public if only public" time="0.001852872">
+  </testcase>
+  <testcase name="Tag Clear privacy level should return public at first position" time="0.00133998">
+  </testcase>
+  <testcase name="Tag Clear privacy level should return public if public is last" time="0.001231516">
+  </testcase>
+  <testcase name="Tag Clear privacy level should return nothing" time="0.053707091">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

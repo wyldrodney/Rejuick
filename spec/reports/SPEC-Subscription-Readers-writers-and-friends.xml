@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Subscription Readers, writers and friends" tests="3" time="0.111516164" failures="0" errors="3" skipped="0">
+  <testcase name="Subscription Readers, writers and friends should find reader for writer and return array" time="0.038171837">
+    <failure type="ActiveRecord::RecordNotFound" message="Couldn't find User with id=1">
+Couldn't find User with id=1 (ActiveRecord::RecordNotFound)
+ActiveRecord::RecordNotFound:
+Couldn't find User with id=1
+     ./app/models/subscription.rb:11:in `block in &lt;class:Subscription&gt;'
+     ./spec/models/subscription_spec.rb:54:in `block (3 levels) in &lt;top (required)&gt;'    </failure>
+  </testcase>
+  <testcase name="Subscription Readers, writers and friends should find friends and return array's intersection" time="0.025047083">
+    <failure type="ActiveRecord::RecordNotFound" message="Couldn't find User with id=1">
+Couldn't find User with id=1 (ActiveRecord::RecordNotFound)
+ActiveRecord::RecordNotFound:
+Couldn't find User with id=1
+     ./app/models/subscription.rb:11:in `block in &lt;class:Subscription&gt;'
+     ./spec/models/subscription_spec.rb:64:in `block (3 levels) in &lt;top (required)&gt;'    </failure>
+  </testcase>
+  <testcase name="Subscription Readers, writers and friends should find writer for reader and return array" time="0.025150976">
+    <failure type="ActiveRecord::RecordNotFound" message="Couldn't find User with id=1">
+Couldn't find User with id=1 (ActiveRecord::RecordNotFound)
+ActiveRecord::RecordNotFound:
+Couldn't find User with id=1
+     ./app/models/subscription.rb:11:in `block in &lt;class:Subscription&gt;'
+     ./spec/models/subscription_spec.rb:59:in `block (3 levels) in &lt;top (required)&gt;'    </failure>
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

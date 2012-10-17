@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="User Whitelist" tests="4" time="0.190602557" failures="0" errors="0" skipped="0">
+  <testcase name="User Whitelist should not find user" time="0.03132582">
+  </testcase>
+  <testcase name="User Whitelist should add receiver on wl" time="0.058351998">
+  </testcase>
+  <testcase name="User Whitelist should find user" time="0.041901206">
+  </testcase>
+  <testcase name="User Whitelist should remove receiver on second wl" time="0.058354966">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

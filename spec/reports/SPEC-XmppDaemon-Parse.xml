@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="XmppDaemon Parse" tests="4" time="0.006627899" failures="0" errors="0" skipped="0">
+  <testcase name="XmppDaemon Parse should parse blend jids" time="0.001840279">
+  </testcase>
+  <testcase name="XmppDaemon Parse should parse blank body" time="0.001312236">
+  </testcase>
+  <testcase name="XmppDaemon Parse should parse clean jids" time="0.001267985">
+  </testcase>
+  <testcase name="XmppDaemon Parse should parse nil body" time="0.001651633">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

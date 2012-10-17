@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Subscription Whitelist" tests="3" time="0.088055708" failures="0" errors="3" skipped="0">
+  <testcase name="Subscription Whitelist should ignore confirmation" time="0.029722749">
+    <failure type="ActiveRecord::RecordNotFound" message="Couldn't find User with id=1">
+Couldn't find User with id=1 (ActiveRecord::RecordNotFound)
+ActiveRecord::RecordNotFound:
+Couldn't find User with id=1
+     ./app/models/subscription.rb:11:in `block in &lt;class:Subscription&gt;'
+     ./spec/models/subscription_spec.rb:20:in `block (3 levels) in &lt;top (required)&gt;'    </failure>
+  </testcase>
+  <testcase name="Subscription Whitelist should set confirmation to false" time="0.025513287">
+    <failure type="ActiveRecord::RecordNotFound" message="Couldn't find User with id=1">
+Couldn't find User with id=1 (ActiveRecord::RecordNotFound)
+ActiveRecord::RecordNotFound:
+Couldn't find User with id=1
+     ./app/models/subscription.rb:11:in `block in &lt;class:Subscription&gt;'
+     ./spec/models/subscription_spec.rb:32:in `block (3 levels) in &lt;top (required)&gt;'    </failure>
+  </testcase>
+  <testcase name="Subscription Whitelist should set confirmation to true" time="0.032196323">
+    <failure type="ActiveRecord::RecordNotFound" message="Couldn't find User with id=1">
+Couldn't find User with id=1 (ActiveRecord::RecordNotFound)
+ActiveRecord::RecordNotFound:
+Couldn't find User with id=1
+     ./app/models/subscription.rb:11:in `block in &lt;class:Subscription&gt;'
+     ./app/models/subscription.rb:68:in `whitelist'
+     ./spec/models/subscription_spec.rb:27:in `block (3 levels) in &lt;top (required)&gt;'    </failure>
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

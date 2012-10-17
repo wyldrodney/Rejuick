@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Post Read post" tests="5" time="0.165495076" failures="0" errors="0" skipped="0">
+  <testcase name="Post Read post should allow to read my own post" time="0.047724866">
+  </testcase>
+  <testcase name="Post Read post should tell that user not found" time="0.00269117">
+  </testcase>
+  <testcase name="Post Read post should not allow to read post" time="0.047346852">
+  </testcase>
+  <testcase name="Post Read post should tell that post not found" time="0.033414693">
+  </testcase>
+  <testcase name="Post Read post should tell that post number is wrong" time="0.033430365">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

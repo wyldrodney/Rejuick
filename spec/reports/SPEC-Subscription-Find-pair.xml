@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Subscription Find pair" tests="2" time="0.045049175" failures="0" errors="1" skipped="0">
+  <testcase name="Subscription Find pair should find pair" time="0.041371224">
+    <failure type="ActiveRecord::RecordNotFound" message="Couldn't find User with id=1">
+Couldn't find User with id=1 (ActiveRecord::RecordNotFound)
+ActiveRecord::RecordNotFound:
+Couldn't find User with id=1
+     ./app/models/subscription.rb:11:in `block in &lt;class:Subscription&gt;'
+     ./spec/models/subscription_spec.rb:13:in `block (3 levels) in &lt;top (required)&gt;'    </failure>
+  </testcase>
+  <testcase name="Subscription Find pair should not find pair" time="0.002796473">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

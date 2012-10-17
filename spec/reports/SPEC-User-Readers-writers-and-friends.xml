@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="User Readers, writers and friends" tests="3" time="0.406903506" failures="0" errors="0" skipped="0">
+  <testcase name="User Readers, writers and friends should return array of readers" time="0.187713285">
+  </testcase>
+  <testcase name="User Readers, writers and friends should return array of friends" time="0.091941833">
+  </testcase>
+  <testcase name="User Readers, writers and friends should return array of writers" time="0.126619865">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

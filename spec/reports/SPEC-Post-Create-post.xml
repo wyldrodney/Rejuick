@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Post Create post" tests="3" time="0.074220412" failures="0" errors="0" skipped="0">
+  <testcase name="Post Create post should tell that user not found" time="0.00278184">
+  </testcase>
+  <testcase name="Post Create post should tell that post saved" time="0.037330914">
+  </testcase>
+  <testcase name="Post Create post should tell that body is empty" time="0.03347566">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

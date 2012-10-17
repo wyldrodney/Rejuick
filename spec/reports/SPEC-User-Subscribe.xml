@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="User Subscribe" tests="4" time="0.240726398" failures="0" errors="0" skipped="0">
+  <testcase name="User Subscribe should not find user" time="0.031500339">
+  </testcase>
+  <testcase name="User Subscribe should add receiver on post creation" time="0.066817153">
+  </testcase>
+  <testcase name="User Subscribe should find user" time="0.091620065">
+  </testcase>
+  <testcase name="User Subscribe should add receiver on subscription" time="0.05004009">
+  </testcase>
+  <system-out>
+Not running.
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

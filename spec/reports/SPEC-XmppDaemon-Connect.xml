@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="XmppDaemon Connect" tests="2" time="10.953424036" failures="0" errors="0" skipped="0">
+  <testcase name="XmppDaemon Connect should not connect to server" time="5.296626143">
+  </testcase>
+  <testcase name="XmppDaemon Connect should connect to server" time="5.656349531">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

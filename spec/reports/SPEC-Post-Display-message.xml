@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Post Display message" tests="1" time="0.296619849" failures="0" errors="0" skipped="0">
+  <testcase name="Post Display message should be equal to original (without privacy tags and with newline sign)" time="0.296183202">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

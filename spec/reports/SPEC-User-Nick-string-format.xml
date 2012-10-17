@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="User Nick string format" tests="5" time="0.009231583" failures="0" errors="0" skipped="0">
+  <testcase name="User Nick string format should pass test for @nick-_." time="0.002026637">
+  </testcase>
+  <testcase name="User Nick string format should pass test for @nick" time="0.001545122">
+  </testcase>
+  <testcase name="User Nick string format should pass test for @ник" time="0.001902257">
+  </testcase>
+  <testcase name="User Nick string format should not pass test for nick" time="0.001539342">
+  </testcase>
+  <testcase name="User Nick string format should not pass test for @nick!" time="0.001427077">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tagmap Perform tagmaps" tests="2" time="0.079135936" failures="0" errors="0" skipped="0">
+  <testcase name="Tagmap Perform tagmaps should leave no records in table" time="0.053456537">
+  </testcase>
+  <testcase name="Tagmap Perform tagmaps should create one record" time="0.025038952">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

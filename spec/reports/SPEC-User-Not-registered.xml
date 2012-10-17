@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="User Not registered" tests="1" time="0.002272865" failures="0" errors="0" skipped="0">
+  <testcase name="User Not registered should tell not registered" time="0.001884623">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

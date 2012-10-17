@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="User Nickname" tests="3" time="0.082186563" failures="0" errors="0" skipped="0">
+  <testcase name="User Nickname should fail for wrong nickname" time="0.001903007">
+  </testcase>
+  <testcase name="User Nickname should call update nickname" time="0.046278837">
+  </testcase>
+  <testcase name="User Nickname should create user" time="0.033434994">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

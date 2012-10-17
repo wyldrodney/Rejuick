@@ -5,3 +5,8 @@
 require File.expand_path('../config/application', __FILE__)
 
 Rejuick::Application.load_tasks
+
+gem 'ci_reporter'
+require 'ci/reporter/rake/rspec'
+
+

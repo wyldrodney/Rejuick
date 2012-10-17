@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="XmppDaemon Start and stop" tests="2" time="0.019499983" failures="0" errors="0" skipped="2">
+  <testcase name="XmppDaemon Start and stop should stop (PENDING)" time="0.015607514">
+    <skipped/>
+  </testcase>
+  <testcase name="XmppDaemon Start and stop should start (PENDING)" time="0.003292662">
+    <skipped/>
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="User Find user" tests="2" time="0.061503241" failures="0" errors="0" skipped="0">
+  <testcase name="User Find user should find user" time="0.027618558">
+  </testcase>
+  <testcase name="User Find user should not find user" time="0.03335521">
+  </testcase>
+  <system-out>
+  </system-out>
+  <system-err>
+  </system-err>
+</testsuite>

@@ -28,6 +28,8 @@ group :test, :development do
   gem "rspec-rails", "~> 2.0"
 end
 
+gem 'ci_reporter'
+
 
 
 # Use unicorn as the app server
